@@ -37,12 +37,20 @@
         android:inputType="textPassword"
         android:layout_alignParentStart="true"/>
 
+    <CheckBox
+        android:id="@+id/remember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="@string/remember_login"
+        android:layout_below="@id/edPassword" />
+
     <Button
         android:id="@+id/signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/edPassword"
+        android:layout_below="@id/remember"
         android:layout_marginTop="26dp"
         android:text="@string/SignIn" />
 
@@ -50,17 +58,10 @@
         android:id="@+id/signUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edPassword"
-        android:layout_toRightOf="@id/signIn"
+        android:layout_below="@id/remember"
+        android:layout_toEndOf="@id/signIn"
         android:layout_marginTop="26dp"
         android:text="@string/SignUp" />
 
-    <CheckBox
-        android:id="@+id/remember"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:text="@string/remember_login"
-        android:layout_below="@+id/signIn"
-        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

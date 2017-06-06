@@ -51,49 +51,46 @@
         android:hint="@string/adress"/>
 
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <RadioGroup
+        android:id="@+id/sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/men"
+        <RadioButton
+            android:id="@+id/man"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/men" />
 
-        <CheckBox
+        <RadioButton
             android:id="@+id/women"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/women" />
-
-
-
-
-    </LinearLayout>
+    </RadioGroup>
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
 
 
         <Button
             android:id="@+id/done"
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/complete" />
 
         <Button
             android:id="@+id/cencle"
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/cancle" />
 
 

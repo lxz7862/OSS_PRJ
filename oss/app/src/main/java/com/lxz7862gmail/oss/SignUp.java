@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 import android.widget.EditText;
 import android.widget.Button;
@@ -20,6 +23,7 @@ public class SignUp extends AppCompatActivity {
     private EditText etPasswordConfirm;
     private EditText etName;
     private EditText etAdress;
+    private RadioGroup edSex;
     private Button btnDone;
     private Button btnCancle;
 
@@ -33,6 +37,7 @@ public class SignUp extends AppCompatActivity {
         etPasswordConfirm = (EditText) findViewById(R.id.edPasswordConfirm);
         etName = (EditText) findViewById(R.id.name);
         etAdress = (EditText) findViewById(R.id.adress);
+        edSex = (RadioGroup) findViewById(R.id.sex);
         btnDone = (Button)findViewById(R.id.done);
         btnCancle = (Button)findViewById(R.id.cencle);
 
@@ -68,6 +73,9 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 이메일 입력 확인
+                int id = edSex.getCheckedRadioButtonId();
+                RadioButton rb = (RadioButton) findViewById(id);
+
                 if ((etEmail.getText().toString().length() == 0)){
                     Toast.makeText(SignUp.this, "Email을 입력하세요!", Toast.LENGTH_SHORT).show();
                     etEmail.requestFocus();
@@ -86,15 +94,21 @@ public class SignUp extends AppCompatActivity {
                     return;
                 }
                 if ((etName.getText().toString().length() == 0)) {
-                    Toast.makeText(SignUp.this, "Email을 입력하세요!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, "Name을 입력하세요!", Toast.LENGTH_SHORT).show();
                     etName.requestFocus();
                     return;
                 }
                 if ((etAdress.getText().toString().length() == 0)) {
-                    Toast.makeText(SignUp.this, "Email을 입력하세요!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, "Adress를 입력하세요!", Toast.LENGTH_SHORT).show();
                     etAdress.requestFocus();
                     return;
                 }
+                if (rb.getText().toString().length() == 0){
+                    Toast.makeText(SignUp.this, "성별을 체크하세요!", Toast.LENGTH_SHORT).show();
+                    edSex.requestFocus();
+                    return;
+                }
+
 
                 // 비밀번호 일치 확인
                 if (!etPassword.getText().toString().equals(etPasswordConfirm.getText().toString()) ){
