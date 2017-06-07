@@ -2,20 +2,22 @@ package com.lxz7862gmail.oss;
 
 import android.content.Intent;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.CheckBox;
+
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 import android.widget.EditText;
 import android.widget.Button;
 import android.graphics.Color;
-
+import android.content.SharedPreferences;
 public class SignUp extends AppCompatActivity {
 
     private EditText etEmail;
@@ -26,11 +28,15 @@ public class SignUp extends AppCompatActivity {
     private RadioGroup edSex;
     private Button btnDone;
     private Button btnCancle;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
+        pref = getSharedPreferences("Game",Activity.MODE_PRIVATE );
+        editor = pref.edit();
 
         etEmail = (EditText)findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.edPassword);
@@ -118,6 +124,12 @@ public class SignUp extends AppCompatActivity {
                     etPassword.requestFocus();
                     return;
                 }
+
+
+
+                editor.putString("id",etEmail.getText().toString());
+                editor.putString("pw_1",etPassword.getText().toString());
+                editor.commit();
                 Intent result = new Intent();
                 result.putExtra("email", etEmail.getText().toString());
 

@@ -1,5 +1,6 @@
 package com.lxz7862gmail.oss;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.BoolRes;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        pref = getSharedPreferences("Game",Activity.MODE_PRIVATE );
+        editor = pref.edit();
         edPassword = (EditText) findViewById(R.id.edPassword);
         etEmail = (EditText) findViewById(R.id.etEmail);
         btnSingUp = (Button) findViewById(R.id.signUp);
@@ -42,60 +45,72 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+        if(pref.getBoolean("autoLogin",false)) {
+            etEmail.setText(pref.getString("email",""));
+            edPassword.setText(pref.getString("pw",""));
+            autoLogin.setChecked(true);
+            Toast.makeText(MainActivity.this, "Login Success", Toast.LENGTH_LONG).show();
+        }
+
+
         btnSingIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(pref.getBoolean("autoLgin",false)){
-                    etEmail.setText(pref.getString("id",""));
-                    edPassword.setText(pref.getString("pw",""));
-                    autoLogin.setChecked(true);
-                }
-                else {
-                    String email = etEmail.getText().toString();
-                    String password = edPassword.getText().toString();
-                    Boolean validation = loginValdation(email,password);
 
-                    if(validation) {
-                        Toast.makeText(MainActivity.this, "Lgoin Success", Toast.LENGTH_LONG).show();
 
+
+                    String id = etEmail.getText().toString();
+                    String pw = edPassword.getText().toString();
+                    Boolean valdation = loginValdation(id, pw);
+
+
+                    if (valdation) {
+                        Toast.makeText(MainActivity.this, "Login Success", Toast.LENGTH_LONG).show();
                         if (loginChecked) {
-                            editor.putString("email", email);
-                            editor.putString("pw", password);
+                            // if autoLogin Checked, save values
+                            editor.putString("email", id);
+                            editor.putString("pw", pw);
                             editor.putBoolean("autoLogin", true);
                             editor.commit();
                         }
+
+                    }
+                    else {
+                        Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
                     }
 
-                    else {
-                        Toast.makeText(MainActivity.this,"Login Failed",Toast.LENGTH_LONG).show();
-                    }
+
+
+
+            }
+
+
+        });
+        autoLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    loginChecked = true;
                 }
-                autoLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked){
-                            loginChecked = true;
-                        }
-                        else {
-                            loginChecked = false;
-                            editor.clear();
-                            editor.commit();
-                        }
-                    }
-                });
+                else {
+                    editor.clear();
+                    editor.commit();
+                    loginChecked = false;
+                }
             }
         });
      }
      //아이디와 비밀번호가 일치하는지 확인
      private boolean loginValdation(String id,String password){
-         if (pref.getString("email","").equals(id)&&pref.getString("pw","").equals(password))
+         if (pref.getString("id","").equals(id)&&pref.getString("pw_1","").equals(password))
          {
              return true;
          }
-         else if (pref.getString("email","").equals(null)){
-             Toast.makeText(MainActivity.this,"Please Sign in first",Toast.LENGTH_LONG).show();
-             return false;
-         }
+
+
          else{
              return false;
          }
