@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         autoLogin = (CheckBox) findViewById(R.id.remember);
         btnSingIn = (Button) findViewById(R.id.signIn);
 
+        final Intent menu = new Intent();
+
+
         btnSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +55,10 @@ public class MainActivity extends AppCompatActivity {
             etEmail.setText(pref.getString("email",""));
             edPassword.setText(pref.getString("pw",""));
             autoLogin.setChecked(true);
+            startActivity(menu);
+
             Toast.makeText(MainActivity.this, "Login Success", Toast.LENGTH_LONG).show();
+            finish();
         }
 
 
@@ -68,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     if (valdation) {
+                        startActivity(menu);
                         Toast.makeText(MainActivity.this, "Login Success", Toast.LENGTH_LONG).show();
                         if (loginChecked) {
                             // if autoLogin Checked, save values
@@ -76,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                             editor.putBoolean("autoLogin", true);
                             editor.commit();
                         }
-
+                        finish();
                     }
                     else {
                         Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_LONG).show();

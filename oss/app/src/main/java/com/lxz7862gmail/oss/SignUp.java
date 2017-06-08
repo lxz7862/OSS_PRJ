@@ -69,18 +69,21 @@ public class SignUp extends AppCompatActivity {
 
             }
 
+
             @Override
             public void afterTextChanged(Editable s) {
 
             }
+
+
         });
+
 
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 이메일 입력 확인
                 int id = edSex.getCheckedRadioButtonId();
-                RadioButton rb = (RadioButton) findViewById(id);
 
                 if ((etEmail.getText().toString().length() == 0)){
                     Toast.makeText(SignUp.this, "Email을 입력하세요!", Toast.LENGTH_SHORT).show();
@@ -109,7 +112,7 @@ public class SignUp extends AppCompatActivity {
                     etAdress.requestFocus();
                     return;
                 }
-                if (rb.getText().toString().length() == 0){
+                if (onCheckedChanged(edSex,id) == false){
                     Toast.makeText(SignUp.this, "성별을 체크하세요!", Toast.LENGTH_SHORT).show();
                     edSex.requestFocus();
                     return;
@@ -137,7 +140,11 @@ public class SignUp extends AppCompatActivity {
                 setResult(RESULT_OK, result);
                 finish();
             }
+
+
         });
+
+
 
         btnCancle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,5 +153,25 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
+    }
+    public boolean onCheckedChanged(RadioGroup group , int id)
+    {
+        if(group == edSex)
+        {
+            if (id == R.id.man)
+            {
+
+                return true;
+            }
+            else if (id == R.id.women)
+            {
+                return  true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else return false;
     }
 }
