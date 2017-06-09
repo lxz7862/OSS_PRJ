@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         autoLogin = (CheckBox) findViewById(R.id.remember);
         btnSingIn = (Button) findViewById(R.id.signIn);
 
-        final Intent menu = new Intent();
+        final Intent menu = new Intent(MainActivity.this,MenuActivity.class);
 
 
         btnSingUp.setOnClickListener(new View.OnClickListener() {
@@ -135,4 +135,5 @@ public class MainActivity extends AppCompatActivity {
              etEmail.setText(data.getStringExtra("email"));
          }
      }
+
 }
