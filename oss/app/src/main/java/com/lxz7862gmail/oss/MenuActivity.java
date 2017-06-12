@@ -88,7 +88,7 @@ public class MenuActivity extends AppCompatActivity {
            if (position == 0)
                return new MainFragment();
             else if (position == 1)
-                return new MapFragment();
+                return new Map_Fragment();
             else
                 return new InfoFragment();
         }

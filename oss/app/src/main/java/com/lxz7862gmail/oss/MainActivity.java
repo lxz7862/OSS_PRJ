@@ -76,11 +76,17 @@ public class MainActivity extends AppCompatActivity {
                     if (valdation) {
                         startActivity(menu);
                         Toast.makeText(MainActivity.this, "Login Success", Toast.LENGTH_LONG).show();
-                        if (loginChecked) {
+                        if (autoLogin.isChecked()) {
                             // if autoLogin Checked, save values
                             editor.putString("email", id);
                             editor.putString("pw", pw);
                             editor.putBoolean("autoLogin", true);
+                            editor.commit();
+                        }
+                        else
+                        {
+
+                            editor.clear();
                             editor.commit();
                         }
                         finish();
@@ -96,19 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
-        autoLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    loginChecked = true;
-                }
-                else {
-                    editor.clear();
-                    editor.commit();
-                    loginChecked = false;
-                }
-            }
-        });
+
      }
      //아이디와 비밀번호가 일치하는지 확인
      private boolean loginValdation(String id,String password){
